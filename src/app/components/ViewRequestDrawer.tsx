@@ -1,5 +1,5 @@
 import { X } from "lucide-react";
-import { Request } from "../types/request";
+import { Request, RequestStatus } from "../types/request";
 
 interface ViewRequestDrawerProps {
   request: Request | null;
@@ -7,11 +7,11 @@ interface ViewRequestDrawerProps {
   onClose: () => void;
 }
 
-function StatusChip({ status }: { status: "pending" | "confirmed" | "canceled" }) {
-  const statusStyles = {
+function StatusChip({ status }: { status: RequestStatus }) {
+  const statusStyles: Record<RequestStatus, string> = {
     pending: "bg-[#fef6e7] text-[#b8860b] border-[#f9e5b8]",
     confirmed: "bg-[#e7f6ef] text-[#2d7a4f] border-[#c3e6d4]",
-    canceled: "bg-[#fef0f0] text-[#c62828] border-[#f8d7d7]",
+    cancelled: "bg-[#fef0f0] text-[#c62828] border-[#f8d7d7]",
   };
 
   return (
