@@ -22,17 +22,18 @@ export interface ProductFilterState {
 }
 
 const CATEGORIES = [
-  "Rings",
-  "Earrings",
-  "Necklaces",
-  "Bracelets",
-  "Sebha",
-  "Mugs",
-  "Keychains",
-  "Art Pieces",
-  "Coasters",
-  "Bookmarks",
+  "Prayer beads",
   "Special Pieces",
+  "Bookmarks",
+  "Coasters",
+  "Rings",
+  "Bracelets",
+  "Necklaces",
+  "Keychains",
+  "Mugs",
+  "Earrings",
+  "Large Art pieces",
+  "Small Art pieces",
 ];
 
 const COLLECTIONS = [
@@ -47,11 +48,10 @@ const COLLECTIONS = [
 ];
 
 const SECTIONS = [
-  "Featured",
-  "One of a Kind",
-  "New Arrival",
-  "Best Seller",
-  "Recommended",
+  "Featured Pieces",
+  "One-of-a-Kind Picks",
+  "Refill Request",
+  "you May Also Love",
 ];
 
 export function ProductFilterPanel({ onApplyFilters, onReset, onClose }: ProductFilterPanelProps) {

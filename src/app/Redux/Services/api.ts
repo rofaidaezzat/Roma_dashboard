@@ -4,7 +4,7 @@ import { RootState } from "../store";
 export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "",
+    baseUrl: "https://by-roma.vercel.app",
     prepareHeaders: (headers, { getState }) => {
       // Bypass ngrok browser warning which can mistakenly cause CORS failure
       headers.set("ngrok-skip-browser-warning", "true");

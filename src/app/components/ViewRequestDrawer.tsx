@@ -46,7 +46,6 @@ export function ViewRequestDrawer({ request, isOpen, onClose }: ViewRequestDrawe
             <X className="w-5 h-5 text-[#8e8e8e]" />
           </button>
         </div>
-
         {/* Content */}
         <div className="flex-1 overflow-y-auto px-6 py-6">
           <div className="space-y-6">
