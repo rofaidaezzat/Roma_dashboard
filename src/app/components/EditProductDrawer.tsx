@@ -52,6 +52,7 @@ export function EditProductDrawer({ product, onClose }: EditProductDrawerProps) 
   const [additionalFiles, setAdditionalFiles] = useState<(File | null)[]>([null, null, null]);
   const [materialsStr, setMaterialsStr] = useState("");
   const [notesStr, setNotesStr] = useState("");
+  const [colors, setColors] = useState<string[]>([]);
   const [updateProduct, { isLoading }] = useUpdateProductMutation();
 
   useEffect(() => {
@@ -61,10 +62,12 @@ export function EditProductDrawer({ product, onClose }: EditProductDrawerProps) 
       setAdditionalFiles([null, null, null]);
       setMaterialsStr(product.materials?.join(", ") || "");
       setNotesStr(product.notes?.join(", ") || "");
+      setColors(product.colors || []);
     } else {
       setFormData(null);
       setMaterialsStr("");
       setNotesStr("");
+      setColors([]);
     }
   }, [product]);
 
@@ -101,6 +104,7 @@ export function EditProductDrawer({ product, onClose }: EditProductDrawerProps) 
     data.append("category", formData.category);
     formData.sections.forEach(s => data.append("sections", s));
     formData.collections.forEach(c => data.append("collections", c));
+    colors.forEach(color => data.append("colors", color));
     data.append("stock", formData.quantity.toString());
     data.append("price", formData.price.toString());
     if (formData.description) data.append("description", formData.description);
@@ -340,6 +344,61 @@ export function EditProductDrawer({ product, onClose }: EditProductDrawerProps) 
                   </div>
                 ))}
               </div>
+            </div>
+
+            {/* Colors (optional) */}
+            <div>
+              <Label className="text-xs text-[#757575] mb-2 block">
+                Colors <span className="font-normal text-[#aaa]">(optional)</span>
+              </Label>
+              <div className="flex flex-wrap gap-3">
+                {['red', 'blue', 'green', 'black', 'white', 'yellow', 'orange', 'purple', 'pink', 'gray', 'brown', 'beige', 'navy', 'teal', 'maroon', 'lime', 'olive', 'cyan', 'magenta', 'gold', 'silver', 'indigo', 'violet', 'turquoise', 'lavender', 'coral', 'crimson', 'khaki', 'plum', 'salmon', 'tan', 'wheat', 'burgundy', 'baby blue'].map((color) => (
+                  <div key={color}>
+                    <label
+                      htmlFor={`edit-color-${color}`}
+                      className={`relative flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-gray-200 shadow-sm transition-all hover:scale-110 ${
+                        colors.includes(color) ? 'ring-2 ring-[#da3b90] ring-offset-2' : ''
+                      }`}
+                      style={{ backgroundColor: color === 'baby blue' ? '#89CFF0' : color === 'burgundy' ? '#800020' : color }}
+                      title={color}
+                    >
+                      <input
+                        id={`edit-color-${color}`}
+                        type="checkbox"
+                        value={color}
+                        checked={colors.includes(color)}
+                        onChange={(e) => {
+                          if (e.target.checked) {
+                            setColors([...colors, color]);
+                          } else {
+                            setColors(colors.filter((c) => c !== color));
+                          }
+                        }}
+                        className="sr-only"
+                      />
+                      {colors.includes(color) && (
+                        <svg
+                          className={`h-4 w-4 ${
+                            ['white', 'yellow', 'beige', 'lime', 'gold', 'silver', 'wheat', 'tan', 'khaki', 'lavender', 'cyan', 'baby blue'].includes(color)
+                              ? 'text-black'
+                              : 'text-white'
+                          }`}
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                        </svg>
+                      )}
+                    </label>
+                  </div>
+                ))}
+              </div>
+              {colors.length > 0 && (
+                <p className="mt-1.5 text-xs text-[#8e264f]">
+                  Selected: {colors.join(', ')}
+                </p>
+              )}
             </div>
           </div>
 

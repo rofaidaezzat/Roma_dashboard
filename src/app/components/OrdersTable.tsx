@@ -92,9 +92,30 @@ export function OrdersTable({
                   <div className="max-w-[180px]">
                     <div className="flex items-center gap-2">
                       <img src={order.cartItems[0]?.primaryImage} alt="" className="w-8 h-8 rounded object-cover border border-[#f9e5f2]" />
-                      <span className="text-xs text-[#464646]">
-                        {order.cartItems.length} item{order.cartItems.length !== 1 ? "s" : ""}
-                      </span>
+                      <div className="flex flex-col gap-1">
+                        <span className="text-xs text-[#464646]">
+                          {order.cartItems.length} item{order.cartItems.length !== 1 ? "s" : ""}
+                        </span>
+                        {(() => {
+                          const allColors = Array.from(new Set(order.cartItems.flatMap(item => item.colors || [])));
+                          if (allColors.length === 0) return null;
+                          return (
+                            <div className="flex flex-wrap gap-1">
+                              {allColors.slice(0, 3).map((color) => (
+                                <div
+                                  key={color}
+                                  className="h-2.5 w-2.5 rounded-full border border-gray-200 shadow-sm"
+                                  style={{ backgroundColor: color.toLowerCase() === 'baby blue' ? '#89CFF0' : color.toLowerCase() === 'burgundy' ? '#800020' : color }}
+                                  title={color}
+                                />
+                              ))}
+                              {allColors.length > 3 && (
+                                <span className="text-[10px] text-[#8e8e8e]">+{allColors.length - 3}</span>
+                              )}
+                            </div>
+                          );
+                        })()}
+                      </div>
                     </div>
                   </div>
                 </td>

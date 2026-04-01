@@ -6,6 +6,7 @@ export interface CartItem {
   primaryImage: string;
   price: number;
   quantity: number;
+  colors?: string[];
 }
 
 export interface UserInfo {

@@ -114,6 +114,20 @@ export function ViewOrderDrawer({ order, open, onClose, onEdit }: ViewOrderDrawe
                   <div className="flex-1">
                     <p className="text-xs text-[#757575]">Qty: {item.quantity}</p>
                     <p className="text-xs text-[#8e8e8e] truncate max-w-[160px]">{item.product}</p>
+                    {item.colors && item.colors.length > 0 && (
+                      <div className="flex flex-wrap gap-2 mt-2">
+                        {item.colors.map((color) => (
+                          <div key={color} className="flex flex-col items-center gap-1">
+                            <div
+                              className="h-4 w-4 rounded-full border border-gray-300 shadow-sm"
+                              style={{ backgroundColor: color.toLowerCase() === 'baby blue' ? '#89CFF0' : color.toLowerCase() === 'burgundy' ? '#800020' : color }}
+                              title={color}
+                            />
+                            <span className="text-[10px] text-[#757575] capitalize">{color}</span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
                   <p className="text-sm font-semibold text-[#464646]">EGP {(item.price * item.quantity).toLocaleString()}</p>
                 </div>

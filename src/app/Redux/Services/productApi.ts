@@ -13,6 +13,7 @@ export interface Product {
   stock: number;
   materials: string[];
   notes: string[];
+  colors?: string[];
   slug: string;
   createdAt: string;
   updatedAt: string;

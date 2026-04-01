@@ -108,6 +108,25 @@ export function ViewProductDrawer({ product, onClose, onEdit }: ViewProductDrawe
               </div>
             </div>
 
+            {/* Colors */}
+            {product.colors && product.colors.length > 0 && (
+              <div>
+                <div className="text-xs text-[#8e8e8e] uppercase tracking-wide mb-2">Colors</div>
+                <div className="flex flex-wrap gap-3">
+                  {product.colors.map((color) => (
+                    <div key={color} className="flex flex-col items-center gap-1">
+                      <div
+                        className="h-8 w-8 rounded-full border border-gray-200 shadow-sm"
+                        style={{ backgroundColor: color === 'baby blue' ? '#89CFF0' : color === 'burgundy' ? '#800020' : color }}
+                        title={color}
+                      />
+                      <span className="text-[10px] text-[#757575] capitalize">{color}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* Quantity & Stock Status */}
             <div className="grid grid-cols-2 gap-4">
               <div>
